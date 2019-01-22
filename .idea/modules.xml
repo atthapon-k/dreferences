@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dreferences.iml" filepath="$PROJECT_DIR$/dreferences.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dreferenceslib/dreferenceslib.iml" filepath="$PROJECT_DIR$/dreferenceslib/dreferenceslib.iml" />
+    </modules>
+  </component>
+</project>
