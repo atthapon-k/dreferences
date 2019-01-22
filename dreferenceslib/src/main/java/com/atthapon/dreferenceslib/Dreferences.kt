@@ -225,7 +225,7 @@ object Dreferences {
 
 
     class Builder {
-        private lateinit var mKey: String
+        private var mKey: String = ""
         private lateinit var mContext: Context
         private var mMode = -1
         private var mUseDefault = false
