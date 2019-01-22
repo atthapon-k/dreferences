@@ -13,9 +13,10 @@ import android.text.TextUtils
  */
 class Dreferences {
     companion object {
-        private val DEFAUTL_SUFFIX = "_preferences"
-        private val LENGTH = "#LENGTH"
+        private const val DEFAULT_SUFFIX = "_preferences"
+        private const val LENGTH = "#LENGTH"
         private var mPrefs: SharedPreferences? = null
+        
         fun initPrefs(context: Context) {
             Builder().setContext(context).build()
         }
@@ -222,55 +223,56 @@ class Dreferences {
             return getPreferences().edit()
         }
 
-        class Builder {
-            private lateinit var mKey: String
-            private lateinit var mContext: Context
-            private var mMode = -1
-            private var mUseDefault = false
+    }
 
-            fun setPrefsName(prefsName: String): Builder {
-                mKey = prefsName
-                return this
-            }
+    internal class Builder {
+        private lateinit var mKey: String
+        private lateinit var mContext: Context
+        private var mMode = -1
+        private var mUseDefault = false
 
-            fun setContext(context: Context): Builder {
-                mContext = context
-                return this
-            }
+        fun setPrefsName(prefsName: String): Builder {
+            mKey = prefsName
+            return this
+        }
 
-            /**
-             * @deprecated
-             * MODE_WORLD_READABLE, MODE_WORLD_WRITEABLE,MODE_MULTI_PROCESS
-             * These mode were deprecated in API level 17.
-             */
-            @SuppressLint("WorldReadableFiles", "WorldWriteableFiles")
-            fun setMode(mode: Int): Builder {
-                if (mode == ContextWrapper.MODE_PRIVATE
-                    || mode == ContextWrapper.MODE_WORLD_READABLE
-                    || mode == ContextWrapper.MODE_WORLD_WRITEABLE
-                    || mode == ContextWrapper.MODE_MULTI_PROCESS
-                ) {
-                    mMode = mode
-                } else {
-                    throw  RuntimeException(
-                        "The mode in the SharedPreference can only be set too ContextWrapper.MODE_PRIVATE," +
-                                " ContextWrapper.MODE_WORLD_READABLE, ContextWrapper.MODE_WORLD_WRITEABLE or ContextWrapper.MODE_MULTI_PROCESS"
-                    )
-                }
-                return this
-            }
+        fun setContext(context: Context): Builder {
+            mContext = context
+            return this
+        }
 
-            fun setUseDefaultSharedPreference(defaultSharedPreference: Boolean): Builder {
-                mUseDefault = defaultSharedPreference
-                return this
+        /**
+         * @deprecated
+         * MODE_WORLD_READABLE, MODE_WORLD_WRITEABLE,MODE_MULTI_PROCESS
+         * These mode were deprecated in API level 17.
+         */
+        @SuppressLint("WorldReadableFiles", "WorldWriteableFiles")
+        fun setMode(mode: Int): Builder {
+            if (mode == ContextWrapper.MODE_PRIVATE
+                || mode == ContextWrapper.MODE_WORLD_READABLE
+                || mode == ContextWrapper.MODE_WORLD_WRITEABLE
+                || mode == ContextWrapper.MODE_MULTI_PROCESS
+            ) {
+                mMode = mode
+            } else {
+                throw  RuntimeException(
+                    "The mode in the SharedPreference can only be set too ContextWrapper.MODE_PRIVATE," +
+                            " ContextWrapper.MODE_WORLD_READABLE, ContextWrapper.MODE_WORLD_WRITEABLE or ContextWrapper.MODE_MULTI_PROCESS"
+                )
             }
+            return this
+        }
 
-            fun build() {
-                if (TextUtils.isEmpty(mKey)) mKey = mContext.packageName
-                if (mUseDefault) mKey += DEFAUTL_SUFFIX
-                if (mMode == -1) mMode = ContextWrapper.MODE_PRIVATE
-                Dreferences.initPrefs(mContext, mKey, mMode)
-            }
+        fun setUseDefaultSharedPreference(defaultSharedPreference: Boolean): Builder {
+            mUseDefault = defaultSharedPreference
+            return this
+        }
+
+        fun build() {
+            if (TextUtils.isEmpty(mKey)) mKey = mContext.packageName
+            if (mUseDefault) mKey += DEFAULT_SUFFIX
+            if (mMode == -1) mMode = ContextWrapper.MODE_PRIVATE
+            Dreferences.initPrefs(mContext, mKey, mMode)
         }
     }
 }
