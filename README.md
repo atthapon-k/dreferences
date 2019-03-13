@@ -1,3 +1,3 @@
 [![](https://jitpack.io/v/atthapon-k/dreferences.svg)](https://jitpack.io/#atthapon-k/dreferences)
-# Dreferences
+# Hohenheim-Prefs
 A small library containing a wrapper for the Shared Preferences of android
