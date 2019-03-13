@@ -1,4 +1,4 @@
-package com.atthapon.dreferenceslib
+package com.atthapon.hohenheimprefs
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,7 +11,7 @@ import android.text.TextUtils
 /**
  * Created by Atthapon Korkaew on 22/1/2019 AD.
  */
-object Dreferences {
+object HohenheimPrefs {
 
     private const val DEFAULT_SUFFIX = "_preferences"
     private const val LENGTH = "#LENGTH"
@@ -25,7 +25,7 @@ object Dreferences {
         mPrefs = context.getSharedPreferences(prefsName, mode)
     }
 
-    fun getPreferences(): SharedPreferences {
+    private fun getPreferences(): SharedPreferences {
         return mPrefs ?: throw  RuntimeException(
             "Prefs class not correctly instantiated. Please call Builder.setContext().build() in the Application class onCreate."
         )
@@ -271,7 +271,7 @@ object Dreferences {
             if (TextUtils.isEmpty(mKey)) mKey = mContext.packageName
             if (mUseDefault) mKey += DEFAULT_SUFFIX
             if (mMode == -1) mMode = ContextWrapper.MODE_PRIVATE
-            Dreferences.initPrefs(mContext, mKey, mMode)
+            HohenheimPrefs.initPrefs(mContext, mKey, mMode)
         }
     }
 }
