@@ -25,7 +25,7 @@ object HohenheimPrefs {
         mPrefs = context.getSharedPreferences(prefsName, mode)
     }
 
-    private fun getPreferences(): SharedPreferences {
+    fun getPreferences(): SharedPreferences {
         return mPrefs ?: throw  RuntimeException(
             "Prefs class not correctly instantiated. Please call Builder.setContext().build() in the Application class onCreate."
         )
